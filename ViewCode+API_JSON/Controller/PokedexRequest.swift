@@ -14,13 +14,40 @@ enum PokemonError: Error {
     case canNotProcessData
 }
 
+struct PokedexRequest {
+    let resourceURL: URL
+    
+    init() {
+        let resourceString = "https://pokeapi.co/api/v2/pokemon/"
+        guard let resourceURL = URL(string: resourceString) else {fatalError()}
+        self.resourceURL = resourceURL
+    }
+    
+    func getPokedex (completion: @escaping(Result<[PokedexCell], PokemonError>) -> Void) {
+        let dataTask = URLSession.shared.dataTask(with: resourceURL) { data, _, _ in
+            guard let jsonData = data else {
+                completion(.failure(.noDataAvailable))
+                return
+            }
+            do {
+                let decoder = JSONDecoder()
+                let pokedexResponse = try decoder.decode(PokedexResponse.self, from: jsonData)
+                let pokemonList = pokedexResponse.results
+                completion(.success(pokemonList))
+            } catch {
+                completion(.failure(.canNotProcessData))
+            }
+        }
+        dataTask.resume()
+    }
+}
+
 struct PokemonRequest {
     let resourceURL: URL
 
     init (pokemonCode: String){
         let resourceString = "https://pokeapi.co/api/v2/pokemon/\(pokemonCode)"
         guard let resourceURL = URL(string: resourceString) else {fatalError()}
-        
         self.resourceURL = resourceURL
     }
     

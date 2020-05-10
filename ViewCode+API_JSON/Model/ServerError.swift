@@ -8,8 +8,7 @@
 
 import Foundation
 
-struct ServerError
-{
-    let msgError: String
-    let statusCode: Int
+struct ServerError {
+    var msgError: String
+    var statusCode: Int
 }

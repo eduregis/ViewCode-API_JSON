@@ -8,17 +8,14 @@
 
 import Foundation
 
-struct PokedexModel: Decodable {
-    let count: Int
-    let next: String
-    let previous: String
-    let results: Int
+struct PokedexResponse: Decodable {
+    var count: Int
+    var next: String?
+    var previous: String?
+    var results: [PokedexCell]
 }
-extension PokedexModel {
-    init() {
-        self.count = 0
-        self.next = ""
-        self.previous = ""
-        self.results = 0
-    }
+
+struct PokedexCell: Decodable {
+    var name: String
+    var url: String
 }

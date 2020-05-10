@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let controller = ViewController()
+        let controller = PokemonListTableViewController()
         navigation.viewControllers = [controller]
         window?.rootViewController = navigation
         window?.makeKeyAndVisible()
