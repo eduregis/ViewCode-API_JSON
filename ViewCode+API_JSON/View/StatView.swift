@@ -32,7 +32,7 @@ class StatView: UIView {
         super.init(frame: .zero)
         statName.text = name.uppercased()
         statValue.text = "\(value)"
-        print(value)
+        // print(value)
         if (value < 60) {
             statValue.textColor = .statRed
         } else if (value < 90) {

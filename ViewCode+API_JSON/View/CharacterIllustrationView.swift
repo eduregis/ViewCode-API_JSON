@@ -30,7 +30,7 @@ class CharacterIllustrationView: UIView {
     
     lazy var characterName: UILabel = {
         let name = UILabel()
-    name.translatesAutoresizingMaskIntoConstraints = false
+        name.translatesAutoresizingMaskIntoConstraints = false
         name.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         // name.textColor = .fireRed
         self.addSubview(name)

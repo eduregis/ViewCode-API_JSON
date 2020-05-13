@@ -45,8 +45,8 @@ struct PokedexRequest {
 struct PokemonRequest {
     let resourceURL: URL
 
-    init (pokemonCode: String){
-        let resourceString = "https://pokeapi.co/api/v2/pokemon/\(pokemonCode)"
+    init (pokemonURL: String){
+        let resourceString = pokemonURL
         guard let resourceURL = URL(string: resourceString) else {fatalError()}
         self.resourceURL = resourceURL
     }

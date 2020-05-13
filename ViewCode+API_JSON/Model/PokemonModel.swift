@@ -9,29 +9,22 @@
 import Foundation
 
 struct PokemonModel: Decodable {
-    var id: Int
-    var name: String
-    var base_experience: Int
-    var species: PokemonSpecies
+    var id: Int?
+    var name: String?
+    var base_experience: Int?
+    var species: PokemonSpecies?
+    var types: [PokemonType]?
 }
 
 struct PokemonSpecies: Decodable {
-    var name: String
+    var name: String?
 }
 
-extension PokemonModel {
-    init(){
-        self.id = 0
-        self.name = ""
-        self.base_experience = 0
-        self.species = PokemonSpecies()
-        //self.urlImage = ""
-    }
+struct PokemonType:  Decodable {
+    var type: PokemonTypeInfo?
 }
 
-extension PokemonSpecies {
-    init() {
-        self.name = ""
-    }
+struct PokemonTypeInfo: Decodable {
+    var name: String?
 }
 

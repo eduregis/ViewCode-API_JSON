@@ -10,60 +10,78 @@ import UIKit
 
 class PokemonViewController: UIViewController {
 
-    var pokemon: PokemonModel = PokemonModel() {
+    var pokemon: PokemonModel? {
         didSet {
-            print("1 -) \(pokemon.name)")
+            print("2-)", pokemon?.name ?? "")
+            testeLabel.text = pokemon?.name
+            // charIllustration.characterName.text = "teste"
+            // charIllustrationAux = CharacterIllustrationView(image: UIImage(named: "Bulbasaur")!, backgroundImage: UIImage(named: "pokeball_bkg")!, name: pokemon?.name ?? pokemon?.name)
         }
     }
     
+    lazy var testeLabel: UILabel = {
+        let name = UILabel()
+        name.translatesAutoresizingMaskIntoConstraints = false
+        name.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        name.text = "funciona disgraça"
+        return name
+    }()
+    
+    
     lazy var charIllustration: CharacterIllustrationView = {
         // chamando o construtor criado anteriormente
-        let charIllustrationAux = CharacterIllustrationView(image: UIImage(named: "Bulbasaur")!, backgroundImage: UIImage(named: "pokeball_bkg")!, name: "Bulbasaur")
+        let charIllustrationAux = CharacterIllustrationView(image: UIImage(named: "Bulbasaur")!, backgroundImage: UIImage(named: "pokeball_bkg")!, name: pokemon?.name ?? "bulbasaur")
         charIllustrationAux.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(charIllustrationAux)
+        //self.view.addSubview(charIllustrationAux)
         return charIllustrationAux
     }()
     
     lazy var charTypes: CharacterTypesView = {
         let charTypesAux = CharacterTypesView(type1: "grass", type2: "poison")
         charTypesAux.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(charTypesAux)
+        // view.addSubview(charTypesAux)
         return charTypesAux
     }()
     
     lazy var charStats: CharacterStatsView = {
         let charStatsAux = CharacterStatsView(hp: 45, atk: 49, def: 49, spatk: 65, spdef: 65, speed: 45)
         charStatsAux.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(charStatsAux)
+        //self.view.addSubview(charStatsAux)
         return charStatsAux
     }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        let pokemonRequest = PokemonRequest(pokemonCode: "1")
-        pokemonRequest.getPokemon { [weak self] result in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success(let pokemon):
-                self?.pokemon = pokemon
-                print("2 -) \(self!.pokemon.name)")
-            }
-        }
-        print("3 -) \(pokemon.name)")
+        print("1-)", pokemon?.name ?? "")
+        self.view.addSubview(testeLabel)
+        self.view.addSubview(charIllustration)
+        self.view.addSubview(charTypes)
+        self.view.addSubview(charStats)
         configureLayout()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 
     private func configureLayout() {
         NSLayoutConstraint.activate([
+            
+            testeLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
+            testeLabel.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor),
+            testeLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            testeLabel.bottomAnchor.constraint(equalTo: self.charIllustration.topAnchor),
+            
             charIllustration.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
             charIllustration.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor),
-            charIllustration.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            //charIllustration.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             charIllustration.heightAnchor.constraint(equalTo: charIllustration.widthAnchor),
+            
             charTypes.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             charTypes.topAnchor.constraint(equalTo: charIllustration.bottomAnchor, constant: -15),
+            
             charStats.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             charStats.topAnchor.constraint(equalTo: charTypes.bottomAnchor, constant: 60)
         ])

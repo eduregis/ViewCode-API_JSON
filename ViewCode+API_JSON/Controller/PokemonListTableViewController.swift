@@ -25,7 +25,7 @@ class PokemonListTableViewController: UITableViewController {
         pokedexRequest.getPokedex { [weak self] result in
             switch result {
             case .failure(let error):
-                print(error, "aa")
+                print(error)
             case .success(let pokedex):
                 self?.listOfPokemons = pokedex
             }
@@ -45,5 +45,21 @@ class PokemonListTableViewController: UITableViewController {
         let pokemon = listOfPokemons[indexPath.row]
         cell.textLabel?.text = pokemon.name
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let pokemonView = PokemonViewController()
+        let pokemonRequest = PokemonRequest(pokemonURL: listOfPokemons[indexPath.row].url)
+        pokemonRequest.getPokemon { [weak pokemonView] result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let pokemon):
+                pokemonView?.pokemon = pokemon
+            }
+        }
+        
+        show(pokemonView, sender: self)
+        // print(listOfPokemons[indexPath.row].url)
     }
 }
