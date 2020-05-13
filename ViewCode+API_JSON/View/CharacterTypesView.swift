@@ -40,6 +40,11 @@ class CharacterTypesView: UIView {
         configureLayout()
     }
     
+    func updateTypes(type1: String, type2: String) {
+        type1View.typeName.text = type1
+        type2View.typeName.text = type2
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented, because will not be used on IB")
     }

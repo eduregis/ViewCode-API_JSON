@@ -14,6 +14,15 @@ class PokemonViewController: UIViewController {
         didSet {
             print("2-)", pokemon?.name ?? "")
             testeLabel.text = pokemon?.name
+            if (pokemon?.types?.count == 2){
+                charTypes.updateTypes(type1: pokemon?.types?[1].type?.name ?? "", type2: "")
+            } else {
+                charTypes.updateTypes(type1: pokemon?.types?[0].type?.name ?? "", type2: "")
+            }
+           
+            
+            //charTypes = CharacterTypesView(type1: pokemon?.types?[0].type?.name ?? "", type2: "poison")
+            // t
             // charIllustration.characterName.text = "teste"
             // charIllustrationAux = CharacterIllustrationView(image: UIImage(named: "Bulbasaur")!, backgroundImage: UIImage(named: "pokeball_bkg")!, name: pokemon?.name ?? pokemon?.name)
         }
