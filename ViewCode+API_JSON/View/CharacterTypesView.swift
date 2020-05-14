@@ -11,13 +11,13 @@ import UIKit
 class CharacterTypesView: UIView {
     
     lazy var type1View: TypeView = {
-        let type1 = TypeView(name: "grass")
+        let type1 = TypeView()
         type1.translatesAutoresizingMaskIntoConstraints = false
         return type1
     }()
     
     lazy var type2View: TypeView = {
-        let type2 = TypeView(name: "poison")
+        let type2 = TypeView()
         type2.translatesAutoresizingMaskIntoConstraints = false
         return type2
     }()
@@ -29,20 +29,26 @@ class CharacterTypesView: UIView {
         stack.alignment = .fill
         stack.distribution = .fillEqually
         stack.spacing = 10
-        self.addSubview(stack)
+        
         return stack
     }()
     
-    init(type1: String, type2: String = "") {
+    init() {
         super.init(frame: .zero)
-//        type1View.typeName.text = type1
-//        type2View.typeName.text = type2
+        self.addSubview(stack)
         configureLayout()
     }
     
-    func updateTypes(type1: String, type2: String) {
-        type1View.typeName.text = type1
-        type2View.typeName.text = type2
+    func updateTypes(type1: PokemonType, type2: PokemonType? = nil) {
+        type1View.type = type1.type
+        if let type2Aux = type2 {
+            type2View.type = type2Aux.type
+            type2View.isHidden = false
+        } else {
+            type2View.isHidden = true
+        }
+        
+        
     }
     
     required init?(coder: NSCoder) {
@@ -51,8 +57,8 @@ class CharacterTypesView: UIView {
     
     private func configureLayout() {
         NSLayoutConstraint.activate([
-        stack.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 48),
-        stack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -48)
+            stack.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 48),
+            stack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -48)
         ])
     }
 }

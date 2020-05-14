@@ -9,13 +9,13 @@
 import UIKit
 
 extension UIColor {
-    static var normalBeige: UIColor { return UIColor(displayP3Red: 142/255, green: 210/255, blue: 116/255, alpha: 1)
+    static var normalBeige: UIColor { return UIColor(displayP3Red: 124/255, green: 125/255, blue: 110/255, alpha: 1)
     }
     static var fireRed: UIColor { return UIColor(displayP3Red: 252/255, green: 70/255, blue: 47/255, alpha: 1)
     }
-    static var waterBlue: UIColor { return UIColor(displayP3Red: 142/255, green: 210/255, blue: 116/255, alpha: 1)
+    static var waterBlue: UIColor { return UIColor(displayP3Red: 42/255, green: 130/255, blue: 255/255, alpha: 1)
     }
-    static var electricYellow: UIColor { return UIColor(displayP3Red: 142/255, green: 210/255, blue: 116/255, alpha: 1)
+    static var electricYellow: UIColor { return UIColor(displayP3Red: 248/255, green: 190/255, blue: 39/255, alpha: 1)
     }
     static var leafGreen: UIColor { return UIColor(displayP3Red: 142/255, green: 210/255, blue: 116/255, alpha: 1)
     }
@@ -55,7 +55,7 @@ extension UIColor {
 }
 
 func colorTypeView (type: String) -> UIColor {
-    switch type {
+    switch type.lowercased() {
     case "normal":
         return .normalBeige
     case "fire":

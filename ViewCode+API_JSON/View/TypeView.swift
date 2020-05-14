@@ -9,6 +9,13 @@
 import UIKit
 
 class TypeView: UIView {
+    
+    var type: PokemonTypeInfo? {
+        didSet {
+            self.typeName.text = self.type?.name?.uppercased()
+        }
+    }
+    
     lazy var typeName: UILabel = {
         let name = UILabel()
     name.translatesAutoresizingMaskIntoConstraints = false
@@ -19,9 +26,8 @@ class TypeView: UIView {
         return name
     }()
     
-    init (name: String = "") {
+    init () {
         super.init(frame: .zero)
-        typeName.text = name
         configureLayout()
     }
     

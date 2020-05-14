@@ -12,41 +12,26 @@ class PokemonViewController: UIViewController {
 
     var pokemon: PokemonModel? {
         didSet {
-            print("2-)", pokemon?.name ?? "")
-            testeLabel.text = pokemon?.name
-            if (pokemon?.types?.count == 2){
-                charTypes.updateTypes(type1: pokemon?.types?[1].type?.name ?? "", type2: "")
-            } else {
-                charTypes.updateTypes(type1: pokemon?.types?[0].type?.name ?? "", type2: "")
-            }
-           
+            charIllustration.updateCharIllustrationView(characterName: pokemon!.name!)
             
-            //charTypes = CharacterTypesView(type1: pokemon?.types?[0].type?.name ?? "", type2: "poison")
-            // t
-            // charIllustration.characterName.text = "teste"
-            // charIllustrationAux = CharacterIllustrationView(image: UIImage(named: "Bulbasaur")!, backgroundImage: UIImage(named: "pokeball_bkg")!, name: pokemon?.name ?? pokemon?.name)
+            if (pokemon?.types?.count == 2){
+                charTypes.updateTypes(type1: (pokemon?.types?[1])!, type2: (pokemon?.types?[0])!)
+            } else {
+                charTypes.updateTypes(type1: (pokemon?.types?[0])!)
+            }
         }
     }
     
-    lazy var testeLabel: UILabel = {
-        let name = UILabel()
-        name.translatesAutoresizingMaskIntoConstraints = false
-        name.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        name.text = "funciona disgraça"
-        return name
-    }()
-    
-    
     lazy var charIllustration: CharacterIllustrationView = {
         // chamando o construtor criado anteriormente
-        let charIllustrationAux = CharacterIllustrationView(image: UIImage(named: "Bulbasaur")!, backgroundImage: UIImage(named: "pokeball_bkg")!, name: pokemon?.name ?? "bulbasaur")
+        let charIllustrationAux = CharacterIllustrationView(image: UIImage(named: "Bulbasaur")!, backgroundImage: UIImage(named: "pokeball_bkg")!)
         charIllustrationAux.translatesAutoresizingMaskIntoConstraints = false
         //self.view.addSubview(charIllustrationAux)
         return charIllustrationAux
     }()
     
     lazy var charTypes: CharacterTypesView = {
-        let charTypesAux = CharacterTypesView(type1: "grass", type2: "poison")
+        let charTypesAux = CharacterTypesView()
         charTypesAux.translatesAutoresizingMaskIntoConstraints = false
         // view.addSubview(charTypesAux)
         return charTypesAux
@@ -63,29 +48,17 @@ class PokemonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        print("1-)", pokemon?.name ?? "")
-        self.view.addSubview(testeLabel)
         self.view.addSubview(charIllustration)
         self.view.addSubview(charTypes)
         self.view.addSubview(charStats)
         configureLayout()
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 
     private func configureLayout() {
         NSLayoutConstraint.activate([
-            
-            testeLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
-            testeLabel.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor),
-            testeLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            testeLabel.bottomAnchor.constraint(equalTo: self.charIllustration.topAnchor),
-            
             charIllustration.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
             charIllustration.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor),
-            //charIllustration.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            charIllustration.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             charIllustration.heightAnchor.constraint(equalTo: charIllustration.widthAnchor),
             
             charTypes.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),

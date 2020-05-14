@@ -9,6 +9,13 @@
 import UIKit
 
 class CharacterIllustrationView: UIView {
+    
+    var name: String? {
+        didSet {
+            self.characterName.text = self.name
+        }
+    }
+    
     lazy var backgroundView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -37,12 +44,11 @@ class CharacterIllustrationView: UIView {
         return name
     }()
     
-    init (image: UIImage, backgroundImage: UIImage, name: String) {
+    init (image: UIImage, backgroundImage: UIImage) {
         // chamamos o init padrão da view. Iniciamos com o frame 0 para ele se ajustar as constraints
         super.init(frame: .zero)
         backgroundView.image = backgroundImage
         characterImage.image = image
-        characterName.text = name
         // função que ajustará o layout
         configureLayout()
     }
@@ -50,6 +56,10 @@ class CharacterIllustrationView: UIView {
     required init?(coder: NSCoder) {
         // Dara esse erro caso se tente usar esse componente numa storyboard
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateCharIllustrationView (characterName: String) {
+        name = characterName
     }
     
     private func configureLayout() {
