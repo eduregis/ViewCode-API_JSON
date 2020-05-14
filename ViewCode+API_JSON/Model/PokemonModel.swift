@@ -14,6 +14,7 @@ struct PokemonModel: Decodable {
     var base_experience: Int?
     var species: PokemonSpecies?
     var types: [PokemonType]?
+    var stats: [PokemonStat]?
 }
 
 struct PokemonSpecies: Decodable {
@@ -28,3 +29,6 @@ struct PokemonTypeInfo: Decodable {
     var name: String?
 }
 
+struct PokemonStat: Decodable {
+    var base_stat: Int?
+}

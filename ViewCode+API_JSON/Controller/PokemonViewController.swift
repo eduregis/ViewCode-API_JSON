@@ -19,28 +19,26 @@ class PokemonViewController: UIViewController {
             } else {
                 charTypes.updateTypes(type1: (pokemon?.types?[0])!)
             }
+            
+            charStats.updateStats(stat1: (pokemon?.stats?[5])!, stat2: (pokemon?.stats?[4])!, stat3: (pokemon?.stats?[3])!, stat4: (pokemon?.stats?[2])!, stat5: (pokemon?.stats?[1])!, stat6: (pokemon?.stats?[0])!)
         }
     }
     
     lazy var charIllustration: CharacterIllustrationView = {
-        // chamando o construtor criado anteriormente
         let charIllustrationAux = CharacterIllustrationView(image: UIImage(named: "Bulbasaur")!, backgroundImage: UIImage(named: "pokeball_bkg")!)
         charIllustrationAux.translatesAutoresizingMaskIntoConstraints = false
-        //self.view.addSubview(charIllustrationAux)
         return charIllustrationAux
     }()
     
     lazy var charTypes: CharacterTypesView = {
         let charTypesAux = CharacterTypesView()
         charTypesAux.translatesAutoresizingMaskIntoConstraints = false
-        // view.addSubview(charTypesAux)
         return charTypesAux
     }()
     
     lazy var charStats: CharacterStatsView = {
-        let charStatsAux = CharacterStatsView(hp: 45, atk: 49, def: 49, spatk: 65, spdef: 65, speed: 45)
+        let charStatsAux = CharacterStatsView()
         charStatsAux.translatesAutoresizingMaskIntoConstraints = false
-        //self.view.addSubview(charStatsAux)
         return charStatsAux
     }()
 

@@ -9,38 +9,39 @@
 import UIKit
 
 class CharacterStatsView: UIView {
+    
     lazy var statHpView: StatView = {
-        let statHp = StatView(name: "HP", value: 45)
+        let statHp = StatView(name: "HP")
         statHp.translatesAutoresizingMaskIntoConstraints = false
         return statHp
     }()
     
     lazy var statAtkView: StatView = {
-        let statAtk = StatView(name: "ATK", value: 49)
+        let statAtk = StatView(name: "ATK")
         statAtk.translatesAutoresizingMaskIntoConstraints = false
         return statAtk
     }()
     
     lazy var statDefView: StatView = {
-        let statDef = StatView(name: "DEF", value: 49)
+        let statDef = StatView(name: "DEF")
         statDef.translatesAutoresizingMaskIntoConstraints = false
         return statDef
     }()
     
     lazy var statSpAtkView: StatView = {
-        let statSpAtk = StatView(name: "SP.ATK", value: 65)
+        let statSpAtk = StatView(name: "SP.ATK")
         statSpAtk.translatesAutoresizingMaskIntoConstraints = false
         return statSpAtk
     }()
     
     lazy var statSpDefView: StatView = {
-        let statSpDef = StatView(name: "SP.DEF", value: 65)
+        let statSpDef = StatView(name: "SP.DEF")
         statSpDef.translatesAutoresizingMaskIntoConstraints = false
         return statSpDef
     }()
     
     lazy var statSpeedView: StatView = {
-        let statSpeed = StatView(name: "SPEED", value: 45)
+        let statSpeed = StatView(name: "SPEED")
         statSpeed.translatesAutoresizingMaskIntoConstraints = false
         return statSpeed
     }()
@@ -52,36 +53,26 @@ class CharacterStatsView: UIView {
         stack.alignment = .fill
         stack.distribution = .fillEqually
         stack.spacing = 8
-        self.addSubview(stack)
         return stack
     }()
     
-    init(hp: Int, atk: Int, def: Int, spatk: Int, spdef: Int, speed: Int) {
+    init() {
         super.init(frame: .zero)
-//        statHpView.statName.text = "HP"
-//        statHpView.statValue.text = "\(hp)"
-//        statAtkView.statName.text = "ATK"
-//        statAtkView.statValue.text = "\(atk)"
-//        statDefView.statName.text = "DEF"
-//        statDefView.statValue.text = "\(def)"
-//        statSpAtkView.statName.text = "SP.ATK"
-//        statSpAtkView.statValue.text = "\(spatk)"
-//        statSpDefView.statName.text = "SP.DEF"
-//        statSpDefView.statValue.text = "\(spdef)"
-//        statSpeedView.statName.text = "SPEED"
-//        statSpeedView.statValue.text = "\(speed)"
-        
-//        statHpView = StatView(name: "HP", value: hp)
-//        statAtkView = StatView(name: "ATTACK", value: atk)
-//        statDefView = StatView(name: "DEFENSE", value: def)
-//        statSpAtkView = StatView(name: "SP. ATK", value: spatk)
-//        statSpDefView = StatView(name: "SP. DEF", value: spdef)
-//        statSpeedView = StatView(name: "SPEED", value: speed)
+        self.addSubview(stack)
         configureLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented, because will not be used on IB")
+    }
+    
+    func updateStats(stat1: PokemonStat, stat2: PokemonStat, stat3: PokemonStat, stat4: PokemonStat, stat5: PokemonStat, stat6: PokemonStat) {
+        statHpView.stat = stat1
+        statAtkView.stat = stat2
+        statDefView.stat = stat3
+        statSpAtkView.stat = stat4
+        statSpDefView.stat = stat5
+        statSpeedView.stat = stat6
     }
     
     private func configureLayout() {

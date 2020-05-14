@@ -10,6 +10,22 @@ import UIKit
 
 class StatView: UIView {
     
+    var stat: PokemonStat? {
+        didSet {
+            if let statAux = self.stat?.base_stat {
+                print(statAux)
+                self.statValue.text = "\(statAux)"
+                if (statAux < 60) {
+                    statValue.textColor = .statRed
+                } else if (statAux < 90) {
+                    statValue.textColor = .statYellow
+                } else {
+                    statValue.textColor = .statGreen
+                }
+            }
+        }
+    }
+    
     lazy var statName: UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
@@ -28,18 +44,9 @@ class StatView: UIView {
         return value
     }()
 
-    init (name: String, value: Int) {
+    init (name: String) {
         super.init(frame: .zero)
         statName.text = name.uppercased()
-        statValue.text = "\(value)"
-        // print(value)
-        if (value < 60) {
-            statValue.textColor = .statRed
-        } else if (value < 90) {
-            statValue.textColor = .statYellow
-        } else {
-            statValue.textColor = .statGreen
-        }
         configureLayout()
     }
     

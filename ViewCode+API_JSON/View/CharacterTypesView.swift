@@ -39,6 +39,10 @@ class CharacterTypesView: UIView {
         configureLayout()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented, because will not be used on IB")
+    }
+    
     func updateTypes(type1: PokemonType, type2: PokemonType? = nil) {
         type1View.type = type1.type
         if let type2Aux = type2 {
@@ -47,12 +51,6 @@ class CharacterTypesView: UIView {
         } else {
             type2View.isHidden = true
         }
-        
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented, because will not be used on IB")
     }
     
     private func configureLayout() {

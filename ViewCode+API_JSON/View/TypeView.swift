@@ -18,7 +18,7 @@ class TypeView: UIView {
     
     lazy var typeName: UILabel = {
         let name = UILabel()
-    name.translatesAutoresizingMaskIntoConstraints = false
+        name.translatesAutoresizingMaskIntoConstraints = false
         name.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         name.textColor = .white
         name.textAlignment = .center
